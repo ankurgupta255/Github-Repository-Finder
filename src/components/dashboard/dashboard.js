@@ -1,6 +1,10 @@
 import React from 'react';
 import RepoList from '../repolist/repolist';
 
+const initialState={
+    repositories: null
+}
+
 class Dashboard extends React.Component{
     constructor(){
         super()
@@ -14,18 +18,17 @@ class Dashboard extends React.Component{
             username: event.target.value
         })
     }
-    repoChange=(event)=>{
-        this.setState({
-            repositories: event.target.value
-        })
-    }
     onButtonSubmit=()=>{
+        this.setState(initialState)
         fetch(`https://api.github.com/users/${this.state.username}/repos?sort=created:asc&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}`,{
             method: 'GET'
         }).then(response=>response.json()).then(data=>{
-            this.setState({
-                repositories: data
-            })
+            console.log(data)
+            if(data.message !== "Not Found"){
+                this.setState({
+                    repositories: data
+                })
+            }
         })
         .catch(error=>{
             console.log(error)
@@ -50,7 +53,8 @@ class Dashboard extends React.Component{
             <legend class="f4 fw6 ph0 mh0 mt2">Number of Repositories: {this.state.repositories.length}</legend>
             <RepoList repos={this.state.repositories} />
             </div> : 
-            <div></div>}
+            <legend class="f4 fw6 ph0 mh0 mt2">No Repositories Found / User Does Not Exist</legend>
+            }
             </main>
         )
     }
