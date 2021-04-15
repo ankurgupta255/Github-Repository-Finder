@@ -23,4 +23,4 @@ npm start
 
 # Screenshot
 
-<img src="Screenshots/screenshot.png" height="200">
+<img src="screenshot.png" height="200">
