@@ -2,6 +2,8 @@
 
 This is a simple Github Repository Finder made using the Github API made using React.
 
+You can access the application at: https://boiling-bayou-11617.herokuapp.com/
+
 To run this application:
 
 - Firstly Clone the Repository.
